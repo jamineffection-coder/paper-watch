@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>纸片手表</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #111;
+      color: #fff;
+      font-family: Arial, "PingFang SC", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .watch {
+      width: 86%;
+      max-width: 420px;
+      padding: 40px 24px;
+      border: 2px solid #fff;
+      border-radius: 28px;
+    }
+
+    .title {
+      font-size: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 2px;
+    }
+
+    .time {
+      font-size: 56px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 20px;
+    }
+
+    .text {
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: #fff;
+      color: #111;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="watch">
+    <div class="title">纸片手表已启动</div>
+    <div class="time" id="time">00:00:00</div>
+    <div class="text" id="copy">正在同步你的时间...</div>
+    <a class="btn" href="https://你的品牌链接.com">了解更多</a>
+  </div>
+
+  <script>
+    function updateTime() {
+      const now = new Date();
+
+      const time = now.toLocaleTimeString('zh-CN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false
+      });
+
+      document.getElementById('time').innerText = time;
+
+      const hour = now.getHours();
+      let copy = '';
+
+      if (hour >= 6 && hour < 12) {
+        copy = '早安，是时候开启今天的高光时刻。';
+      } else if (hour >= 12 && hour < 14) {
+        copy = '午间时刻，给自己一点松弛感。';
+      } else if (hour >= 14 && hour < 18) {
+        copy = '下午继续闪耀，时间站在你这边。';
+      } else if (hour >= 18 && hour < 24) {
+        copy = '夜晚到来，把今天变成值得记住的一刻。';
+      } else {
+        copy = '深夜时刻，灵感正在悄悄发生。';
+      }
+
+      document.getElementById('copy').innerText = copy;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
