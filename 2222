@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>纸片手表</title>
+
+  <!-- 数字感字体：Orbitron -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #ffffff;
+      color: #000000;
+      font-family: "Orbitron", "Arial", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .watch-page {
+      width: 100%;
+      padding: 32px 20px;
+    }
+
+    .watch-card {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto;
+      padding: 48px 24px;
+      border: 3px solid #000000;
+      border-radius: 28px;
+      background: #ffffff;
+    }
+
+    .label {
+      font-size: 14px;
+      letter-spacing: 4px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      text-transform: uppercase;
+    }
+
+    .time {
+      font-size: clamp(48px, 15vw, 82px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 22px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .date {
+      font-size: 16px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 28px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slogan {
+      font-size: 13px;
+      letter-spacing: 2px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: #000000;
+      margin: 28px auto;
+    }
+
+    @media (max-width: 380px) {
+      .watch-card {
+        padding: 40px 18px;
+      }
+
+      .label {
+        font-size: 12px;
+        letter-spacing: 3px;
+      }
+
+      .date {
+        font-size: 14px;
+      }
+
+      .slogan {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="watch-page">
+    <section class="watch-card">
+      <div class="label">PAPER WATCH</div>
+
+      <div class="time" id="time">00:00:00</div>
+
+      <div class="date" id="date">0000.00.00</div>
+
+      <div class="divider"></div>
+
+      <div class="slogan">
+        纸片手表已启动<br>
+        现在，是你的时间
+      </div>
+    </section>
+  </main>
+
+  <script>
+    function padZero(num) {
+      return String(num).padStart(2, "0");
+    }
+
+    function updateTime() {
+      const now = new Date();
+
+      const hours = padZero(now.getHours());
+      const minutes = padZero(now.getMinutes());
+      const seconds = padZero(now.getSeconds());
+
+      const year = now.getFullYear();
+      const month = padZero(now.getMonth() + 1);
+      const day = padZero(now.getDate());
+
+      document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
+      document.getElementById("date").textContent = `${year}.${month}.${day}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
