@@ -1,155 +1,101 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>北京时间</title>
 
-  <title>纸片手表</title>
-
-  <!-- 数字感字体：Orbitron -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <!-- 数码感字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
-    html,
     body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
+      width: 100vw;
+      height: 100vh;
       background: #ffffff;
       color: #000000;
-      font-family: "Orbitron", "Arial", sans-serif;
-    }
-
-    body {
-      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+    }
+
+    .container {
       text-align: center;
+      padding: 24px;
     }
 
-    .watch-page {
-      width: 100%;
-      padding: 32px 20px;
-    }
-
-    .watch-card {
-      width: 100%;
-      max-width: 430px;
-      margin: 0 auto;
-      padding: 48px 24px;
-      border: 3px solid #000000;
-      border-radius: 28px;
-      background: #ffffff;
-    }
-
-    .label {
-      font-size: 14px;
-      letter-spacing: 4px;
-      font-weight: 700;
+    .title {
+      font-size: 22px;
+      font-weight: 500;
       margin-bottom: 28px;
-      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .time {
-      font-size: clamp(48px, 15vw, 82px);
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: 3px;
-      margin-bottom: 22px;
-      font-variant-numeric: tabular-nums;
+      font-family: "Share Tech Mono", monospace;
+      font-size: 64px;
+      font-weight: bold;
+      letter-spacing: 4px;
+      margin-bottom: 26px;
+      line-height: 1.2;
     }
 
-    .date {
+    .wish {
       font-size: 16px;
-      letter-spacing: 2px;
-      font-weight: 700;
-      margin-bottom: 28px;
-      font-variant-numeric: tabular-nums;
+      font-weight: 400;
+      letter-spacing: 1px;
     }
 
-    .slogan {
-      font-size: 13px;
-      letter-spacing: 2px;
-      line-height: 1.8;
-      font-weight: 500;
-    }
-
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: #000000;
-      margin: 28px auto;
-    }
-
-    @media (max-width: 380px) {
-      .watch-card {
-        padding: 40px 18px;
+    @media (max-width: 480px) {
+      .title {
+        font-size: 20px;
+        margin-bottom: 24px;
       }
 
-      .label {
-        font-size: 12px;
+      .time {
+        font-size: 52px;
         letter-spacing: 3px;
       }
 
-      .date {
-        font-size: 14px;
-      }
-
-      .slogan {
-        font-size: 12px;
+      .wish {
+        font-size: 15px;
       }
     }
   </style>
 </head>
-
 <body>
-  <main class="watch-page">
-    <section class="watch-card">
-      <div class="label">PAPER WATCH</div>
 
-      <div class="time" id="time">00:00:00</div>
-
-      <div class="date" id="date">0000.00.00</div>
-
-      <div class="divider"></div>
-
-      <div class="slogan">
-        纸片手表已启动<br>
-        现在，是你的时间
-      </div>
-    </section>
-  </main>
+  <div class="container">
+    <div class="title">现在是北京时间</div>
+    <div class="time" id="time">00:00:00</div>
+    <div class="wish">祝您生活愉快</div>
+  </div>
 
   <script>
-    function padZero(num) {
-      return String(num).padStart(2, "0");
-    }
-
-    function updateTime() {
+    function updateBeijingTime() {
       const now = new Date();
 
-      const hours = padZero(now.getHours());
-      const minutes = padZero(now.getMinutes());
-      const seconds = padZero(now.getSeconds());
+      // 转换为北京时间，Asia/Shanghai 时区
+      const beijingTime = new Intl.DateTimeFormat("zh-CN", {
+        timeZone: "Asia/Shanghai",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).format(now);
 
-      const year = now.getFullYear();
-      const month = padZero(now.getMonth() + 1);
-      const day = padZero(now.getDate());
-
-      document.getElementById("time").textContent = `${hours}:${minutes}:${seconds}`;
-      document.getElementById("date").textContent = `${year}.${month}.${day}`;
+      document.getElementById("time").textContent = beijingTime;
     }
 
-    updateTime();
-    setInterval(updateTime, 1000);
+    updateBeijingTime();
+    setInterval(updateBeijingTime, 1000);
   </script>
+
 </body>
 </html>
