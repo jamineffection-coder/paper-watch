@@ -1,102 +1,101 @@
-<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>纸片手表</title>
+  <title>北京时间</title>
+
+  <!-- 数码感字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
   <style>
-    body {
+    * {
       margin: 0;
-      height: 100vh;
-      background: #111;
-      color: #fff;
-      font-family: Arial, "PingFang SC", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .watch {
-      width: 86%;
-      max-width: 420px;
-      padding: 40px 24px;
-      border: 2px solid #fff;
-      border-radius: 28px;
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      color: #000000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+    }
+
+    .container {
+      text-align: center;
+      padding: 24px;
     }
 
     .title {
-      font-size: 20px;
-      margin-bottom: 24px;
-      letter-spacing: 2px;
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 28px;
+      letter-spacing: 1px;
     }
 
     .time {
-      font-size: 56px;
+      font-family: "Share Tech Mono", monospace;
+      font-size: 64px;
       font-weight: bold;
-      letter-spacing: 2px;
-      margin-bottom: 20px;
+      letter-spacing: 4px;
+      margin-bottom: 26px;
+      line-height: 1.2;
     }
 
-    .text {
+    .wish {
       font-size: 16px;
-      color: #ccc;
-      line-height: 1.6;
+      font-weight: 400;
+      letter-spacing: 1px;
     }
 
-    .btn {
-      display: inline-block;
-      margin-top: 28px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      background: #fff;
-      color: #111;
-      text-decoration: none;
-      font-weight: bold;
+    @media (max-width: 480px) {
+      .title {
+        font-size: 20px;
+        margin-bottom: 24px;
+      }
+
+      .time {
+        font-size: 52px;
+        letter-spacing: 3px;
+      }
+
+      .wish {
+        font-size: 15px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="watch">
-    <div class="title">纸片手表已启动</div>
+
+  <div class="container">
+    <div class="title">现在是北京时间</div>
     <div class="time" id="time">00:00:00</div>
-    <div class="text" id="copy">正在同步你的时间...</div>
-    <a class="btn" href="https://你的品牌链接.com">了解更多</a>
+    <div class="wish">祝您生活愉快</div>
   </div>
 
   <script>
-    function updateTime() {
+    function updateBeijingTime() {
       const now = new Date();
 
-      const time = now.toLocaleTimeString('zh-CN', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
+      // 转换为北京时间，Asia/Shanghai 时区
+      const beijingTime = new Intl.DateTimeFormat("zh-CN", {
+        timeZone: "Asia/Shanghai",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
         hour12: false
-      });
+      }).format(now);
 
-      document.getElementById('time').innerText = time;
-
-      const hour = now.getHours();
-      let copy = '';
-
-      if (hour >= 6 && hour < 12) {
-        copy = '早安，是时候开启今天的高光时刻。';
-      } else if (hour >= 12 && hour < 14) {
-        copy = '午间时刻，给自己一点松弛感。';
-      } else if (hour >= 14 && hour < 18) {
-        copy = '下午继续闪耀，时间站在你这边。';
-      } else if (hour >= 18 && hour < 24) {
-        copy = '夜晚到来，把今天变成值得记住的一刻。';
-      } else {
-        copy = '深夜时刻，灵感正在悄悄发生。';
-      }
-
-      document.getElementById('copy').innerText = copy;
+      document.getElementById("time").textContent = beijingTime;
     }
 
-    updateTime();
-    setInterval(updateTime, 1000);
+    updateBeijingTime();
+    setInterval(updateBeijingTime, 1000);
   </script>
+
 </body>
 </html>
