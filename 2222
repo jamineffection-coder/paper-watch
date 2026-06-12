@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -122,8 +122,8 @@
       <div class="divider"></div>
 
       <div class="slogan">
-        纸片手表已启动<br>
-        现在，是你的时间
+        现在是北京时间<br>
+        为您准点报时
       </div>
     </section>
   </main>
